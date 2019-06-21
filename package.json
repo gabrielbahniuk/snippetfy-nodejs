@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -e js,json,njk",
-    "start": "npm install --save sequelize-cli && node index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +21,6 @@
     "highlight.js": "^9.12.0",
     "markdown-it": "^8.4.2",
     "method-override": "^3.0.0",
-    "mysql2": "^1.5.3",
     "nunjucks": "^3.1.3",
     "path": "^0.12.7",
     "pg": "^7.11.0",

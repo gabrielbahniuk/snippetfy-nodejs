@@ -7,10 +7,10 @@
 
     <section class="snippet-content">
       <div class="actions">
-        <a href="#" data-modal-open="#edit-snippet" class="edit">Editar</a>
+        <a href="#" data-modal-open="#edit-snippet" class="edit">Edit</a>
 
         <form action="/app/categories/{{ activeCategory }}/snippets/{{ currentSnippet.id }}?_method=DELETE" method="post">
-          <button type="submit">Remover</button>
+          <button type="submit">Remove</button>
         </form>
       </div>
       <h1>{{ currentSnippet.title }}</h1>
@@ -20,14 +20,14 @@
     <div class="modal" id="edit-snippet">
        <form class="modal-content" method="post"
             action="/app/categories/{{ activeCategory }}/snippets/{{ currentSnippet.id }}?_method=PUT">
-        <input type="text" name="title" placeholder="Titulo da Categoria" value="{{ currentSnippet.title }}">
+        <input type="text" name="title" placeholder="Category title..." value="{{ currentSnippet.title }}">
 
         <div class="content-container">
-          <textarea name="content" class="mde" placeholder="Conteúdo do snippet">{{ currentSnippet.content }}</textarea>
+          <textarea name="content" class="mde" placeholder="Snippet content...">{{ currentSnippet.content }}</textarea>
         </div>
 
-        <button type="submit">SALVAR SNIPPET</button>
-        <a href="#" data-modal-close="#edit-snippet">CANCELAR</a>
+        <button type="submit">SAVE SNIPPET</button>
+        <a href="#" data-modal-close="#edit-snippet">CANCEL</a>
       </form>
     </div>
   </div>
