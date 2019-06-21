@@ -1,6 +1,3 @@
-const Sequelize = require('sequelize');
-
-const Op = Sequelize;
 const { Snippet, Category } = require('../models');
 
 module.exports = {
