@@ -1,5 +1,11 @@
 # Snippetfy with NodeJS / Express / Nunjucks / Sequelize
 
+### Demo
+
+- Try it out the [DEMO](https://snippetfy-app.herokuapp.com/)
+
+![](http://g.recordit.co/ivo1SciqTr.gif)
+
 ### Installation
 
 - Create an `.env` file in the root folder and put the string below within the file:
@@ -8,7 +14,7 @@
 
 !! Don't forget to adjust the parameters to match your Postgres database
 
-- Install `sequelize-cli` and run ``sequelize run db:migration`.
+- Install `sequelize-cli` and run `sequelize run db:migration`.
 
 - Dev: `npm install && npm dev` or `yarn && yarn dev`.
 - Prod: `npm install && npm start` or `yarn && yarn start`.
