@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 
 const db = {};
 
-const sequelize = new Sequelize(process.env.POSTGRES_URL);
+const sequelize = new Sequelize(process.env.DATABASE_URL);
 
 fs.readdirSync(__dirname)
   .filter(
