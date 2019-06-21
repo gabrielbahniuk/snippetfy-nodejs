@@ -1,3 +1,6 @@
+const Sequelize = require('sequelize');
+
+const Op = Sequelize;
 const { Snippet, Category } = require('../models');
 
 module.exports = {
@@ -5,7 +8,7 @@ module.exports = {
     try {
       const { categoryId } = req.params;
       const snippet = await Snippet.create({ ...req.body, CategoryId: categoryId });
-      req.flash('success', 'Snippet criado com sucesso!');
+      req.flash('success', 'Snippet created successfully');
       return res.redirect(`/app/categories/${categoryId}/snippets/${snippet.id}`);
     } catch (err) {
       return next(err);
@@ -17,6 +20,7 @@ module.exports = {
 
       const categories = await Category.findAll({
         include: [Snippet],
+
         where: { UserId: req.session.user.id },
       });
 
@@ -24,7 +28,7 @@ module.exports = {
         where: { CategoryId: categoryId },
       });
 
-      const snippet = await Snippet.findById(id);
+      const snippet = await Snippet.findByPk(id);
 
       return res.render('snippets/show', {
         activeCategory: categoryId,
@@ -39,9 +43,9 @@ module.exports = {
 
   async update(req, res, next) {
     try {
-      const snippet = await Snippet.findById(req.params.id);
+      const snippet = await Snippet.findByPk(req.params.id);
       await snippet.update(req.body);
-      req.flash('success', 'Snippet atualizado com sucesso!');
+      req.flash('success', 'Snippet updated successfully!');
       return res.redirect(`/app/categories/${req.params.categoryId}/snippets/${snippet.id}`);
     } catch (err) {
       return next(err);
@@ -50,7 +54,7 @@ module.exports = {
   async destroy(req, res, next) {
     try {
       await Snippet.destroy({ where: { id: req.params.id } });
-      req.flash('success', 'Snippet removido com sucesso!');
+      req.flash('success', 'Snippet removed successfully!');
       return res.redirect(`/app/categories/${req.params.categoryId}`);
     } catch (err) {
       return next(err);

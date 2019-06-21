@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, DataTypes) => {
+  up: (queryInterface, DataTypes) => Promise.all([
     queryInterface.createTable('Snippets', {
       id: {
         allowNull: false,
@@ -30,10 +30,8 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE,
       },
-    });
-  },
+    }),
+  ]),
 
-  down: (queryInterface) => {
-    queryInterface.dropTable('Snippets');
-  },
+  down: queryInterface => Promise.all([queryInterface.dropTable('Snippets')]),
 };

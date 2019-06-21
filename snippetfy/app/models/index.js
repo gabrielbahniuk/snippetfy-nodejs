@@ -1,11 +1,11 @@
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const config = require('../../config/database.js');
 
 const db = {};
 
-const sequelize = new Sequelize(config);
+const sequelize = new Sequelize(process.env.POSTGRES_URL);
 
 fs.readdirSync(__dirname)
   .filter(

@@ -1,17 +1,14 @@
 # Snippetfy with NodeJS / Express / Nunjucks / Sequelize
 
-1 - Change the default database config file under `snippetfy/config/database.js`
+### Installation
 
-```js
-module.exports = {
-  username: "DB_USERNAME",
-  password: "DB_PASSWORD",
-  database: "DB_NAME",
-  host: "127.0.0.1",
-  dialect: "DATABASE (e.g. mysql, postgres)"
-};
-```
+1 - Create an `.env` file in the root folder and put the string below within the file:
 
-2 - Run `npm install && npm start`.
+`POSTGRES_URL=postgres://postgres:12345@127.0.0.1:5432/postgres`
 
-3 - Use `localhost:3000/` in your browser.
+Don't forget to adjust the parameters to match your Postgres database!
+
+
+2 - Run `npm install && npm start` or `yarn && yarn start`.
+
+3 - Use `localhost:3000/` in your browser or define the port with the variable `PORT=1234` in the `.env` file.
