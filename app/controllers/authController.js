@@ -12,9 +12,9 @@ module.exports = {
 
   async register(req, res, next) {
     try {
-      const { name, email, password } = req.body;
+      const { name, email } = req.body;
 
-      if (!validateData([name, email, password])) {
+      if (await !validateData([name, email])) {
         req.flash('error', 'Please fill the fields correctly!');
         return res.redirect('back');
       }
@@ -24,8 +24,8 @@ module.exports = {
         return res.redirect('back');
       }
 
-      const encryptedPassword = await bcrypt.hash(password, 5);
-      await User.create({ ...req.body, encryptedPassword });
+      const password = await bcrypt.hash(req.body.password, 5);
+      await User.create({ ...req.body, password });
       req.flash('success', 'User successfully created!');
       return res.redirect('/');
     } catch (err) {
