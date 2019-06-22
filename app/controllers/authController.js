@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const { User } = require('../models');
+const { validateData } = require('../util');
 
 module.exports = {
   signin(req, res) {
@@ -11,15 +12,20 @@ module.exports = {
 
   async register(req, res, next) {
     try {
-      const { email } = req.body;
+      const { name, email, password } = req.body;
+
+      if (!validateData([name, email, password])) {
+        req.flash('error', 'Please fill the fields correctly!');
+        return res.redirect('back');
+      }
 
       if (await User.findOne({ where: { email } })) {
         req.flash('error', 'Email already registered!');
         return res.redirect('back');
       }
 
-      const password = await bcrypt.hash(req.body.password, 5);
-      await User.create({ ...req.body, password });
+      const encryptedPassword = await bcrypt.hash(password, 5);
+      await User.create({ ...req.body, encryptedPassword });
       req.flash('success', 'User successfully created!');
       return res.redirect('/');
     } catch (err) {
@@ -31,7 +37,7 @@ module.exports = {
       const { email, password } = req.body;
       const user = await User.findOne({ where: { email } });
       if (!user) {
-        req.flash('error', 'User inexistent!');
+        req.flash('error', 'User doest not exist!');
         return res.redirect('back');
       }
       if (!(await bcrypt.compare(password, user.password))) {
@@ -47,5 +53,5 @@ module.exports = {
   },
   signout(req, res) {
     return req.session.destroy(() => res.redirect('/'));
-  },
+  }
 };
