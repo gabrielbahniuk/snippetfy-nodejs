@@ -10,9 +10,9 @@
 
 - Create an `.env` file in the root folder and put the string below within the file:
 
-`DATABASE_URL=postgres://postgres:12345@127.0.0.1:5432/postgres`
-`SENDGRID_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`
-`NODE_ENV=development`
+- `DATABASE_URL=postgres://postgres:12345@127.0.0.1:5432/postgres`\
+- `SENDGRID_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`\
+- `NODE_ENV=development`
 
 * Please note to create (if not already) the variable NODE_ENV=production before deployment.
 * Don't forget to adjust the parameters to match your Postgres database.
