@@ -11,12 +11,14 @@
 - Create an `.env` file in the root folder and put the string below within the file:
 
 `DATABASE_URL=postgres://postgres:12345@127.0.0.1:5432/postgres`
+`SENDGRID_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`
+`NODE_ENV=development`
 
-!! Don't forget to adjust the parameters to match your Postgres database
+* Please note to create (if not already) the variable NODE_ENV=production before deployment.
+* Don't forget to adjust the parameters to match your Postgres database.
+* Make sure that your Postgres user has permission to create event triggers!
 
-- Install `sequelize-cli` and run `sequelize run db:migration`.
+- Run `sequelize run db:migration`.
 
 - Dev: `npm install && npm dev` or `yarn && yarn dev`.
 - Prod: `npm install && npm start` or `yarn && yarn start`.
-
-- Use `localhost:3000/` in your browser or define the port with the variable `PORT=1234` in the `.env` file.
