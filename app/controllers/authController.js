@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
-const { User } = require('../models');
+const crypto = require('crypto-random-string');
+const { User, VerificationToken } = require('../models');
 const { validateData } = require('../util');
+const { sendVerificationEmail } = require('./emailController');
 
 module.exports = {
   signin(req, res) {
@@ -23,11 +25,23 @@ module.exports = {
         req.flash('error', 'Email already registered!');
         return res.redirect('back');
       }
-
       const password = await bcrypt.hash(req.body.password, 5);
-      await User.create({ ...req.body, password });
-      req.flash('success', 'User successfully created!');
-      return res.redirect('/');
+
+      const createdUser = await User.create({ ...req.body, password });
+
+      const validateToken = await VerificationToken.create({
+        UserId: createdUser.id,
+        token: crypto({ length: 16 })
+      });
+
+      if (validateToken) {
+        await sendVerificationEmail(email, validateToken.token);
+        req.flash('success', `Please check the e-mail address ${email}`);
+        return res.redirect('/');
+      } else {
+        req.flash('error', 'Invalid token!');
+        return res.redirect('back');
+      }
     } catch (err) {
       return next(err);
     }
@@ -37,11 +51,15 @@ module.exports = {
       const { email, password } = req.body;
       const user = await User.findOne({ where: { email } });
       if (!user) {
-        req.flash('error', 'User doest not exist!');
+        req.flash('error', 'User does not exist!');
         return res.redirect('back');
       }
       if (!(await bcrypt.compare(password, user.password))) {
         req.flash('error', 'Incorrect password!');
+        return res.redirect('back');
+      }
+      if (await !user.isVerified) {
+        req.flash('error', 'User still not activated. Verify your e-mail!');
         return res.redirect('back');
       }
       req.session.user = user;

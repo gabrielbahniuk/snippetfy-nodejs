@@ -1,6 +1,7 @@
 const express = require('express');
 
 const routes = express.Router();
+const verificationController = require('./controllers/verificationController');
 const authController = require('./controllers/authController');
 const dashboardController = require('./controllers/dashboardController');
 const authMiddleware = require('./middlewares/auth');
@@ -53,6 +54,12 @@ routes.delete(
   '/app/categories/:categoryId/snippets/:id',
   snippetController.destroy
 );
+
+/**
+ * Token
+ */
+
+routes.get('/verification', verificationController.check);
 
 routes.use((req, res) => res.render('errors/404'));
 

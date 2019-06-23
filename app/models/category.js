@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Category = sequelize.define('Category', {
-    title: DataTypes.STRING,
+    title: DataTypes.STRING
   });
-  Category.associate = (models) => {
+  Category.associate = models => {
     Category.belongsTo(models.User);
     Category.hasMany(models.Snippet);
   };
