@@ -26,11 +26,11 @@ module.exports = {
             value: `
             <p>
             Hello, <br/>
-            Click on this link to verify your email <strong>http://${
+            Click on this link to verify your email <strong>${
               process.env.NODE_ENV === 'development'
-                ? 'localhost'
+                ? 'http://localhost:3000'
                 : 'https://snippetfy-app.herokuapp.com'
-            }:3000/verification?token=${token}&email=${to}</strong><br/>
+            }/verification?token=${token}&email=${to}</strong><br/>
             </p>
 
             `
