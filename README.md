@@ -14,7 +14,7 @@
 `SENDGRID_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`\
 `NODE_ENV=development`
 
-* Please note to create (if not already) the variable NODE_ENV=production before deployment.
+* Please note to create (if not already) the variable `NODE_ENV=production` before deployment.
 * Don't forget to adjust the parameters to match your Postgres database.
 * Make sure that your Postgres user has permission to create event triggers!
 
@@ -22,3 +22,11 @@
 
 - Dev: `npm install && npm dev` or `yarn && yarn dev`.
 - Prod: `npm install && npm start` or `yarn && yarn start`.
+
+### Usage
+
+- Create an account under localhost or deployed app.
+- Wait for an activation link in the registered email.
+- Click on the link to activate the account.
+- Login and enjoy.
+
