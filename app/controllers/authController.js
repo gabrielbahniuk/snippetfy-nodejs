@@ -35,7 +35,11 @@ module.exports = {
       });
 
       if (validateToken) {
-        await sendVerificationEmail(email, validateToken.token);
+        await sendVerificationEmail(
+          email,
+          validateToken.token,
+          createdUser.name
+        );
         req.flash('success', `Please check the e-mail address ${email}`);
         return res.redirect('/');
       } else {

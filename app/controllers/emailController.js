@@ -2,7 +2,7 @@ require('dotenv').config();
 const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 module.exports = {
-  sendVerificationEmail(to, token) {
+  sendVerificationEmail(to, token, userFullName) {
     const request = sg.emptyRequest({
       method: 'POST',
       path: '/v3/mail/send',
@@ -25,7 +25,7 @@ module.exports = {
             type: 'text/html',
             value: `
             <p>
-            Hello, <br/>
+            Hello ${userFullName}, <br/>
             Click on this link to verify your email <strong>${
               process.env.NODE_ENV === 'development'
                 ? 'http://localhost:3000'
