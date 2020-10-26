@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, DataTypes) => Promise.all([
-    queryInterface.createTable('Snippets', {
+    queryInterface.createTable('Snippet', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,7 +9,7 @@ module.exports = {
       },
       CategoryId: {
         type: DataTypes.INTEGER,
-        references: { model: 'Categories', key: 'id' },
+        references: { model: 'Category', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         allowNull: false,
@@ -33,5 +33,5 @@ module.exports = {
     }),
   ]),
 
-  down: queryInterface => Promise.all([queryInterface.dropTable('Snippets')]),
+  down: queryInterface => Promise.all([queryInterface.dropTable('Snippet')]),
 };

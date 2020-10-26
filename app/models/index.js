@@ -4,8 +4,13 @@ const path = require('path');
 const Sequelize = require('sequelize');
 
 const db = {};
-
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+const opts = {
+  define: {
+    //prevent sequelize from pluralizing table names
+    freezeTableName: true
+  }
+};
+const sequelize = new Sequelize(process.env.DATABASE_URL, opts);
 
 fs.readdirSync(__dirname)
   .filter(

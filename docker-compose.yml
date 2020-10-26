@@ -1,0 +1,41 @@
+version: "3.7"
+services:
+  snippetfy-db:
+    image: postgres:alpine
+    command: -p 5435
+    environment:
+      POSTGRES_USER: psgadmin
+      POSTGRES_PASSWORD: 12345
+      PG_PORT: 5435
+      POSTGRES_DB: snippetfy
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - snippetfy-network
+    container_name: snippetfy-db
+
+  snippetfy-app:
+    build: .
+    depends_on:
+      - snippetfy-db
+    ports:
+      - 3334
+    volumes:
+      - webapp:/home/node/app
+      - /home/node/app/node_modules
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: ${NODE_ENV}
+    networks:
+      - snippetfy-network
+    container_name: snippetfy-app
+    hostname: snippetfy-app
+
+volumes:
+  pgdata:
+  webapp:
+
+networks:
+  snippetfy-network:
+    driver: bridge

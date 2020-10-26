@@ -1,7 +1,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return Promise.all([
-      queryInterface.createTable('VerificationTokens', {
+      queryInterface.createTable('VerificationToken', {
         id: {
           allowNull: false,
           autoIncrement: true,
@@ -12,7 +12,7 @@ module.exports = {
           type: Sequelize.INTEGER,
           onUpdate: 'cascade',
           onDelete: 'cascade',
-          references: { model: 'Users', key: 'id' }
+          references: { model: 'User', key: 'id' }
         },
         token: {
           allowNull: false,
@@ -34,7 +34,7 @@ module.exports = {
         LANGUAGE plpgsql
         AS $$
         BEGIN
-          DELETE FROM "VerificationTokens" WHERE "createdAt" >= NOW() - INTERVAL '24 HOURS';
+          DELETE FROM "VerificationToken" WHERE "createdAt" >= NOW() - INTERVAL '24 HOURS';
         END;
         $$;
       CREATE EVENT TRIGGER expireToken ON ddl_command_start
@@ -45,7 +45,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     return queryInterface
-      .dropTable('VerificationTokens')
+      .dropTable('VerificationToken')
       .then(() => {
         return queryInterface.sequelize.query(
           `DROP EVENT TRIGGER IF EXISTS expireToken;

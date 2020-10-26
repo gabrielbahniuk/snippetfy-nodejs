@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
@@ -24,5 +25,4 @@ app.use(session(sessionConfig));
 app.use(flash());
 app.use(methodOverride('_method'));
 app.use('/', routes);
-
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3334);
