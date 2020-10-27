@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv-expand').config();
 module.exports = {
   development: {
     use_env_variable: 'DATABASE_URL',
