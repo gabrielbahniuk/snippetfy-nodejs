@@ -1,4 +1,7 @@
-require('dotenv-expand').config();
+const dotenv = require('dotenv');
+const dotenvExpand = require('dotenv-expand');
+dotenvExpand(dotenv.config());
+
 module.exports = {
   development: {
     use_env_variable: 'DATABASE_URL',

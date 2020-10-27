@@ -1,4 +1,7 @@
-require('dotenv-expand').config();
+const dotenv = require('dotenv');
+const dotenvExpand = require('dotenv-expand');
+dotenvExpand(dotenv.config());
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
