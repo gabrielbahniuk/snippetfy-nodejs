@@ -4,10 +4,10 @@ services:
     image: postgres:alpine
     command: -p 5435
     environment:
-      POSTGRES_USER: psgadmin
-      POSTGRES_PASSWORD: 12345
-      PG_PORT: 5435
-      POSTGRES_DB: snippetfy
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      PG_PORT: ${DB_PORT}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: always
